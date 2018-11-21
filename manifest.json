@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "ESPN Boris Chen Tiers",
+    "version": "1.0",
+    "description": "Integrates Boris Chen tiers into ESPN Fantasy Football team pages",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://games.espn.com/ffl/clubhouse?*"
+            ],
+            "js": [
+                "espn-borischentiers.js"
+            ]
+        }
+    ]
+}
