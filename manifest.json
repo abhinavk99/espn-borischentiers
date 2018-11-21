@@ -12,5 +12,8 @@
                 "espn-borischentiers.js"
             ]
         }
+    ],
+    "permissions": [
+        "https://s3-us-west-1.amazonaws.com/fftiers/out/*"
     ]
 }
