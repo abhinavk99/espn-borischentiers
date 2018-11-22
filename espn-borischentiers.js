@@ -24,7 +24,7 @@ Promise.all(promises)
       var th = rows[i].getElementsByTagName('th')[0];
       if (th) {
         addTierHeader(i);
-      } else if (rows[i].id.startsWith('pncPlayerRow')) {
+      } else if (rows[i].id.startsWith('pncPlayerRow') || rows[i].id.startsWith('plyr')) {
         addTierTd(i);
       }
     }
