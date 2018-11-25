@@ -1,12 +1,31 @@
 const links = {
   qb: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_QB.txt',
-  rb: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB-HALF.txt',
-  wr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR-HALF.txt',
-  te: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE-HALF.txt',
+  rbstd: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB.txt',
+  rbhalf: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB-HALF.txt',
+  rbppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB-PPR.txt',
+  wrstd: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR.txt',
+  wrhalf: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR-HALF.txt',
+  wrppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR-PPR.txt',
+  testd: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE.txt',
+  tehalf: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE-HALF.txt',
+  teppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE-PPR.txt',
   dst: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_DST.txt',
   k: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_K.txt'
 };
-const tiers = { qb: '', rb: '', wr: '', te: '', dst: '', k: '' };
+const tiers = {
+  qb: '',
+  rbstd: '',
+  rbhalf: '',
+  rbppr: '',
+  wrstd: '',
+  wrhalf: '',
+  wrppr: '',
+  testd: '',
+  tehalf: '',
+  teppr: '',
+  dst: '',
+  k: ''
+};
 
 // Get table of players
 const table = document.getElementById('playertable_0');
@@ -79,13 +98,13 @@ function getTierText(i) {
     tierInfo = tiers.qb;
   } else if (position.includes('RB')) {
     pos = 'RB';
-    tierInfo = tiers.rb;
+    tierInfo = tiers.rbhalf;
   } else if (position.includes('WR')) {
     pos = 'WR';
-    tierInfo = tiers.wr;
+    tierInfo = tiers.wrhalf;
   } else if (position.includes('TE')) {
     pos = 'TE';
-    tierInfo = tiers.te;
+    tierInfo = tiers.tehalf;
   } else if (position.includes(' K ') || position.endsWith('K')) {
     pos = 'K';
     tierInfo = tiers.k;
