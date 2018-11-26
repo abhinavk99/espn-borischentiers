@@ -1,13 +1,13 @@
 const links = {
   qb: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_QB.txt',
   rbstd: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB.txt',
-  rbhalf: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB-HALF.txt',
+  rbhalfppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB-HALF.txt',
   rbppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB-PPR.txt',
   wrstd: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR.txt',
-  wrhalf: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR-HALF.txt',
+  wrhalfppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR-HALF.txt',
   wrppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_WR-PPR.txt',
   testd: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE.txt',
-  tehalf: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE-HALF.txt',
+  tehalfppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE-HALF.txt',
   teppr: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_TE-PPR.txt',
   dst: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_DST.txt',
   k: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_K.txt'
@@ -15,13 +15,13 @@ const links = {
 const tiers = {
   qb: '',
   rbstd: '',
-  rbhalf: '',
+  rbhalfppr: '',
   rbppr: '',
   wrstd: '',
-  wrhalf: '',
+  wrhalfppr: '',
   wrppr: '',
   testd: '',
-  tehalf: '',
+  tehalfppr: '',
   teppr: '',
   dst: '',
   k: ''
@@ -78,15 +78,18 @@ function addTierHeader(i) {
 /* Add tier cell */
 function addTierTd(i) {
   var newTd = rows[i].insertCell();
-  newTd.innerHTML = getTierText(i);
+  getTierText(i).then(tier => newTd.innerHTML = tier);
   newTd.align = 'center';
 }
 
 /* Set the tier in the cell */
-function getTierText(i) {
+async function getTierText(i) {
   var playerInfo = rows[i].getElementsByTagName('td')[1].innerText;
   var [name, position] = playerInfo.split(', ');
   name = name.trim();
+
+  var scoringRes = await browser.storage.sync.get('scoring');
+  var scoringType = scoringRes.scoring;
 
   var tierInfo;
   if (name.includes('D/ST')) {
@@ -98,13 +101,13 @@ function getTierText(i) {
     tierInfo = tiers.qb;
   } else if (position.includes('RB')) {
     pos = 'RB';
-    tierInfo = tiers.rbhalf;
+    tierInfo = tiers['rb' + scoringType];
   } else if (position.includes('WR')) {
     pos = 'WR';
-    tierInfo = tiers.wrhalf;
+    tierInfo = tiers['wr' + scoringType];
   } else if (position.includes('TE')) {
     pos = 'TE';
-    tierInfo = tiers.tehalf;
+    tierInfo = tiers['te' + scoringType];
   } else if (position.includes(' K ') || position.endsWith('K')) {
     pos = 'K';
     tierInfo = tiers.k;
