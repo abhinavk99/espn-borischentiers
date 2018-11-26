@@ -15,5 +15,13 @@
     ],
     "permissions": [
         "https://s3-us-west-1.amazonaws.com/fftiers/out/*"
-    ]
+    ],
+    "browser_action": {
+        "default_icon": {
+            "16": "icons/icon-16.png",
+            "32": "icons/icon-32.png",
+            "48": "icons/icon-48.png",
+            "96": "icons/icon-96.png"
+        }
+    }
 }
