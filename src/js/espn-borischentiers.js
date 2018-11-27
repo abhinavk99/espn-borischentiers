@@ -115,7 +115,8 @@ function getTierText(i) {
     var playerIndex = window.location.href.includes('clubhouse') ? 1 : 0;
     var playerInfo = rows[i].getElementsByTagName('td')[playerIndex].innerText;
     var [name, position] = playerInfo.split(/,\s+/);
-    name = name.trim();
+    // Trim name and get the first two words of it
+    name = name.trim().split(/\s+/).slice(0, 2).join(' ');
 
     // Gets scoring type (STD, 0.5 PPR, PPR)
     browser.storage.sync.get(SCORING_STORAGE_ID)
