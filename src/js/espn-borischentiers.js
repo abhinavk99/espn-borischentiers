@@ -8,6 +8,7 @@ const COLUMN_NAME = 'Boris Chen Tier';
 const SPACER_CLASS = 'sectionLeadingSpacer';
 const SCORING_STORAGE_ID = 'scoring';
 const TIER = 'tier';
+const DEFAULT_SCORING = 'ppr';
 
 const DEFENSE = 'D/ST';
 const QB = 'QB';
@@ -118,6 +119,8 @@ function getTierText(i) {
     browser.storage.sync.get(SCORING_STORAGE_ID)
       .then(scoringRes => {
         var scoringType = scoringRes[SCORING_STORAGE_ID];
+        if (!scoringType)
+          scoringType = DEFAULT_SCORING;
 
         // Gets the tier info of the player's position
         var tierInfo;
