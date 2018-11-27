@@ -111,7 +111,9 @@ function addTierTd(i) {
 /* Set the tier in the cell */
 function getTierText(i) {
   return new Promise((resolve, reject) => {
-    var playerInfo = rows[i].getElementsByTagName('td')[1].innerText;
+    // If on team page, player in cell index 1, otherwise in cell index 0
+    var playerIndex = window.location.href.includes('clubhouse') ? 1 : 0;
+    var playerInfo = rows[i].getElementsByTagName('td')[playerIndex].innerText;
     var [name, position] = playerInfo.split(/,\s+/);
     name = name.trim();
 
