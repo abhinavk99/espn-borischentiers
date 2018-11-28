@@ -9,6 +9,7 @@ const SPACER_CLASS = 'sectionLeadingSpacer';
 const SCORING_STORAGE_ID = 'scoring';
 const TIER = 'tier';
 const DEFAULT_SCORING = 'ppr';
+const NBSP = String.fromCharCode(160);
 
 const DEFENSE = 'D/ST';
 const QB = 'QB';
@@ -143,10 +144,11 @@ function getTierText(i) {
         } else if (position.includes(TE)) {
           pos = TE;
           tierInfo = tiers[TE.toLowerCase() + scoringType];
-        } else if (position.includes(' ' + KICKER + ' ')
+        } else if (position.includes(NBSP + KICKER + NBSP)
                 || position.endsWith(KICKER)) {
+          // position is surrounded by NBSP characters, not spaces
           pos = KICKER;
-          tierInfo = tiers.k;
+          tierInfo = tiers[KICKER.toLowerCase()];
         }
 
         var tier = getTierFromName(name, tierInfo);
