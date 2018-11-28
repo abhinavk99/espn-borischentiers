@@ -120,8 +120,7 @@ function getTierText(i) {
     name = name.trim().split(/\s+/).slice(0, 2).join(' ');
 
     // Gets scoring type (STD, 0.5 PPR, PPR)
-    browser.storage.sync.get(SCORING_STORAGE_ID)
-      .then(scoringRes => {
+    chrome.storage.sync.get(SCORING_STORAGE_ID, scoringRes => {
         var scoringType = scoringRes[SCORING_STORAGE_ID];
         if (!scoringType)
           scoringType = DEFAULT_SCORING;

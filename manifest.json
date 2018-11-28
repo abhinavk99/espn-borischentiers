@@ -26,6 +26,7 @@
     ],
     "browser_action": {
         "browser_style": true,
+        "chrome_style": true,
         "default_icon": {
             "16": "icons/icon-16.png",
             "32": "icons/icon-32.png",
@@ -37,7 +38,8 @@
     },
     "options_ui": {
         "page": "src/options.html",
-        "browser_style": true
+        "browser_style": true,
+        "chrome_style": true
     },
     "applications": {
         "gecko": {
