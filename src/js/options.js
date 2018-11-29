@@ -28,6 +28,16 @@ $(document).ready(() => {
     // Save new scoring when different scoring is selected in radio button
     var scoringSave = {};
     scoringSave[SCORING_STORAGE_ID] = $(RADIO_BUTTON_NAME + ':' + CHECKED_PROP).val();
-    chrome.storage.sync.set(scoringSave);
+    chrome.storage.sync.set(scoringSave, res => {
+      chrome.tabs.query({}, tabs => {
+        for (var i = 0; i < tabs.length; i++) {
+          var url = tabs[i].url;
+          if (url.includes('games.espn.com/ffl/clubhouse')
+            || url.includes('games.espn.com/ffl/freeagency')
+            || url.includes('about:addons'))
+            chrome.tabs.reload(tabs[i].id);
+        }
+      });
+    });
   });
 });
