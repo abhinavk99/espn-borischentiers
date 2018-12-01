@@ -25,8 +25,9 @@ $(document).ready(() => {
         for (var i = 0; i < tabs.length; i++) {
           var url = tabs[i].url;
           if (url.includes('games.espn.com/ffl/clubhouse')
-            || url.includes('games.espn.com/ffl/freeagency')
-            || url.includes('about:addons'))
+           || url.includes('games.espn.com/ffl/freeagency')
+           || url.includes('about:addons')
+           || url.includes('chrome://extensions'))
             chrome.tabs.reload(tabs[i].id);
         }
       });
