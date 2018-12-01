@@ -10,6 +10,8 @@
                 "*://games.espn.com/ffl/freeagency?*"
             ],
             "js": [
+                "src/js/playerNameFixes.js",
+                "src/js/constants.js",
                 "src/js/espn-borischentiers.js"
             ]
         }

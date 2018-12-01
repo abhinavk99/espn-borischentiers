@@ -1,11 +1,3 @@
-const SCORING_STORAGE_ID = 'scoring';
-const RADIO_BUTTON_NAME = "input[name='scoring']";
-const CHECKED_PROP = 'checked';
-
-const STD = 'std';
-const HALFPPR = 'halfppr';
-const PPR = 'ppr';
-
 $(document).ready(() => {
   chrome.storage.sync.get(SCORING_STORAGE_ID, res => {
     // Set radio button in options page to whatever scoring has been saved

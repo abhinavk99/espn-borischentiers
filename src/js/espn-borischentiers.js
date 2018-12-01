@@ -1,23 +1,3 @@
-const UNRANKED_TEXT = 'Unranked';
-const TIER_NOT_FOUND = 'N/A';
-const TABLE_ID = 'playertable_0';
-const PLAYER_ROW_ID_1 = 'pncPlayerRow';
-const PLAYER_ROW_ID_2 = 'plyr';
-const CELL_ALIGN = 'center';
-const COLUMN_NAME = 'Boris Chen Tier';
-const SPACER_CLASS = 'sectionLeadingSpacer';
-const SCORING_STORAGE_ID = 'scoring';
-const TIER = 'tier';
-const DEFAULT_SCORING = 'ppr';
-const NBSP = String.fromCharCode(160);
-
-const DEFENSE = 'D/ST';
-const QB = 'QB';
-const RB = 'RB';
-const WR = 'WR';
-const TE = 'TE';
-const KICKER = 'K';
-
 const links = {
   qb: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_QB.txt',
   rbstd: 'https://s3-us-west-1.amazonaws.com/fftiers/out/text_RB.txt',
@@ -72,7 +52,7 @@ Promise.all(promises)
 /* Checks whether the row in the table stores a player */
 function isPlayerRow(i) {
   return rows[i].id.startsWith(PLAYER_ROW_ID_1)
-      || rows[i].id.startsWith(PLAYER_ROW_ID_2);
+    || rows[i].id.startsWith(PLAYER_ROW_ID_2);
 }
 
 /* Set tier info from Boris Chen for each position */
@@ -121,17 +101,22 @@ function getTierText(i) {
 
     // Gets scoring type (STD, 0.5 PPR, PPR)
     chrome.storage.sync.get(SCORING_STORAGE_ID, scoringRes => {
-        var scoringType = scoringRes[SCORING_STORAGE_ID];
-        if (!scoringType)
-          scoringType = DEFAULT_SCORING;
+      var scoringType = scoringRes[SCORING_STORAGE_ID];
+      if (!scoringType)
+        scoringType = DEFAULT_SCORING;
 
-        // Gets the tier info of the player's position
-        var tierInfo;
-        if (name.includes(DEFENSE)) {
-          pos = DEFENSE;
-          name = name.split(/\s+/)[0];
-          tierInfo = tiers.dst;
-        } else if (position.includes(QB)) {
+      // Gets the tier info of the player's position
+      var tierInfo;
+      if (name.includes(DEFENSE)) {
+        pos = DEFENSE;
+        name = name.split(/\s+/)[0];
+        tierInfo = tiers.dst;
+      } else {
+        // Replace ESPN name with Boris Chen name if they are different
+        if (playerNameFixes.hasOwnProperty(name))
+          name = playerNameFixes[name];
+
+        if (position.includes(QB)) {
           pos = QB;
           tierInfo = tiers.qb;
         } else if (position.includes(RB)) {
@@ -149,12 +134,13 @@ function getTierText(i) {
           pos = KICKER;
           tierInfo = tiers[KICKER.toLowerCase()];
         }
+      }
 
-        var tier = getTierFromName(name, tierInfo);
-        if (tier == TIER_NOT_FOUND)
-          return resolve(UNRANKED_TEXT);
-        return resolve(pos + ' ' + TIER + ' ' + tier);
-      });
+      var tier = getTierFromName(name, tierInfo);
+      if (tier == TIER_NOT_FOUND)
+        return resolve(UNRANKED_TEXT);
+      return resolve(pos + ' ' + TIER + ' ' + tier);
+    });
   });
 }
 
