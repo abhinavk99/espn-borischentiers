@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "ESPN Boris Chen Tiers",
-    "version": "1.5",
+    "version": "1.6",
     "description": "Integrates Boris Chen tiers into ESPN Fantasy Football",
     "content_scripts": [
         {
