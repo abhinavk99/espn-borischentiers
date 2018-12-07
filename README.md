@@ -1,4 +1,7 @@
 # espn-borischentiers
+
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jeepoadedgacclojbfelfglcpldddbpk.svg?style=flat-square)](https://chrome.google.com/webstore/detail/espn-boris-chen-tiers/jeepoadedgacclojbfelfglcpldddbpk) [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/jeepoadedgacclojbfelfglcpldddbpk.svg?style=flat-square)](https://chrome.google.com/webstore/detail/espn-boris-chen-tiers/jeepoadedgacclojbfelfglcpldddbpk) [![Mozilla Add-on](https://img.shields.io/amo/v/espn-borischentiers.svg?style=flat-square)](https://addons.mozilla.org/en-US/firefox/addon/espn-borischentiers/) [![Mozilla Add-on](https://img.shields.io/amo/d/espn-borischentiers.svg?style=flat-square)](https://addons.mozilla.org/en-US/firefox/addon/espn-borischentiers/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 Chrome/Firefox extension that integrates [Boris Chen tiers](http://www.borischen.co/) into ESPN Fantasy Football
 
 ![](https://raw.githubusercontent.com/abhinavk99/espn-borischentiers/master/icons/icon-48.png) Install it on [Chrome](https://chrome.google.com/webstore/detail/espn-boris-chen-tiers/jeepoadedgacclojbfelfglcpldddbpk) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/espn-borischentiers/)!
