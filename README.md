@@ -14,6 +14,8 @@ The Boris Chen tiers show up on team pages and free agency pages. You can set ST
 
 ![](https://raw.githubusercontent.com/abhinavk99/espn-borischentiers/master/screenshots/freeagency.PNG)
 
+![](https://raw.githubusercontent.com/abhinavk99/espn-borischentiers/master/screenshots/colors.PNG)
+
 ## Additional Notes
 
 Check out the Boris Chen tiers source code [here](https://github.com/borisachen/fftiers)!
