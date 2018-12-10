@@ -85,7 +85,22 @@ function addTierHeader(i) {
 /* Add tier cell */
 function addTierTd(i) {
   var newTd = rows[i].insertCell();
-  getTierText(i).then(tier => newTd.innerHTML = tier);
+  getTierText(i).then(tierText => {
+    // Set cell text
+    newTd.innerHTML = tierText;
+
+    // Set cell color if not unranked and colors setting is set to true
+    if (tierText != UNRANKED_TEXT) {
+      chrome.storage.sync.get(COLORS_ID, colorsRes => {
+        if (colorsRes[COLORS_ID]) {
+          var tierTextWords = tierText.split(/\s+/)
+          var tierNumber = parseInt(tierTextWords[tierTextWords.length - 1]);
+          var color = COLORS[(tierNumber - 1) % COLORS.length];
+          newTd.style = 'background-color:' + color + ';';
+        }
+      });
+    }
+  });
   newTd.align = CELL_ALIGN;
 }
 

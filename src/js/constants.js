@@ -21,7 +21,9 @@ const KICKER = 'K';
 
 const SCORING_STORAGE_ID = 'scoring';
 const RADIO_BUTTON_NAME = "input[name='scoring']";
-const CHECKED_PROP = 'checked';
+
+const COLORS_ID = 'colors';
+const SWITCH_NAME = "input[type='checkbox']";
 
 const STD = 'std';
 const HALFPPR = 'halfppr';

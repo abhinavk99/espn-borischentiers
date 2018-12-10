@@ -4,14 +4,21 @@
 
 <head>
     <meta charset='utf-8' />
+    <link rel='stylesheet' href='css/options.css'>
 </head>
 
 <body>
     <form>
-        <label>Scoring</label><br>
+        <label class='scoring'>Scoring</label><br>
         <input class='browser_style' id='std' type='radio' name='scoring' value='std'>Standard<br>
         <input class='browser_style' id='halfppr' type='radio' name='scoring' value='halfppr'>0.5 PPR<br>
-        <input class='browser_style' id='ppr' type='radio' name='scoring' value='ppr'>PPR
+        <input class='browser_style' id='ppr' type='radio' name='scoring' value='ppr'>PPR<br>
+
+        <p>Show tier colors</p>
+        <label class='switch'>
+            <input id='colors' type='checkbox' name='colorSwitch'>
+            <span class='slider round'></span>
+        </label>
     </form>
 
     <script src='js/jquery-3.3.1.min.js'></script>

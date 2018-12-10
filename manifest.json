@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "ESPN Boris Chen Tiers",
-    "version": "1.7",
+    "version": "1.8",
     "description": "Integrates Boris Chen tiers into ESPN Fantasy Football",
     "content_scripts": [
         {
@@ -12,6 +12,7 @@
             "js": [
                 "src/js/playerNameFixes.js",
                 "src/js/constants.js",
+                "src/js/tierColors.js",
                 "src/js/espn-borischentiers.js"
             ]
         }
