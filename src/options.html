@@ -8,15 +8,18 @@
 </head>
 
 <body>
+    <div id='title'>Options</div>
     <form>
-        <label class='scoring'>Scoring</label><br>
-        <input class='browser_style' id='std' type='radio' name='scoring' value='std'>Standard<br>
-        <input class='browser_style' id='halfppr' type='radio' name='scoring' value='halfppr'>0.5 PPR<br>
-        <input class='browser_style' id='ppr' type='radio' name='scoring' value='ppr'>PPR<br>
+        <div id='scoring_div'>
+            <div id='label_id'><label class='scoring'>Scoring</label></div>
+            <input class='browser_style' id='std' type='radio' name='scoring' value='std'>Standard<br>
+            <input class='browser_style' id='halfppr' type='radio' name='scoring' value='halfppr'>0.5 PPR<br>
+            <input class='browser_style' id='ppr' type='radio' name='scoring' value='ppr'>PPR<br><br>
+        </div>
 
-        <p>Show tier colors</p>
         <!-- Taken from https://www.w3schools.com/howto/howto_css_switch.asp -->
         <label class='switch'>
+            <div id='show_tier_colors'>Show tier colors</div>
             <input id='colors' type='checkbox' name='colorSwitch'>
             <span class='slider round'></span>
         </label>

@@ -6,6 +6,7 @@
     display: inline-block;
     width: 30px;
     height: 17px;
+    left: 90px;
 }
 
 /* Hide default HTML checkbox */
@@ -61,4 +62,42 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+body {
+    width:160px;
+    height:180px;
+}
+
+form {
+    position: relative;
+    left: 20px;
+    top: 25px;
+    width: 100px;
+}
+
+#label_id {
+    position: relative;
+    left: 20px;
+    width: 50px;
+    font-size: 15px;
+}
+
+#show_tier_colors {
+    position: relative;
+    left: -90px;
+    width: 100px;
+}
+
+#scoring_div {
+    position: relative;
+    left: 15px;
+}
+
+#title {
+    position: relative;
+    top: 15px;
+    left: 45px;
+    width: 50px;
+    font-size: 20px;
 }
