@@ -8,7 +8,7 @@ $(document).ready(() => {
     } else {
       // Default is PPR if nothing has been saved yet
       if (!res[SCORING_STORAGE_ID]) {
-        var scoringSave = {};
+        let scoringSave = {};
         scoringSave[SCORING_STORAGE_ID] = PPR;
         chrome.storage.sync.set(scoringSave);
       }
@@ -22,13 +22,13 @@ $(document).ready(() => {
 
   $(RADIO_BUTTON_NAME).change(() => {
     // Save new scoring when different scoring is selected in radio button
-    var scoring = $(RADIO_BUTTON_NAME + ':checked').val();
+    let scoring = $(RADIO_BUTTON_NAME + ':checked').val();
     chrome.storage.sync.set({ [SCORING_STORAGE_ID] : scoring });
   });
 
   $(SWITCH_NAME).change(() => {
     // Save colors setting when toggle switched changes state
-    var checked = $('#' + COLORS_ID).is(':checked');
+    let checked = $('#' + COLORS_ID).is(':checked');
     chrome.storage.sync.set({ [COLORS_ID] : checked });
   });
 });

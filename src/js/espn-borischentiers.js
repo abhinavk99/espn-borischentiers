@@ -27,32 +27,22 @@ const tiers = {
   k: ''
 };
 
-// Get table of players
-const table = document.getElementById(TABLE_ID);
-const tbody = table.getElementsByTagName('tbody')[0];
-const rows = tbody.rows;
-
-var promises = Object.keys(links).map(pos => setTierInfo(pos));
-Promise.all(promises)
-  .then(responses => {
-    // Add the cell for each player
-    // If first cell in the row is a header, add header
-    // Otherwise if the row is for a player, add the tier cell
-    for (var i = 0; i < rows.length; i++) {
-      addSpacer(i);
-      var th = rows[i].getElementsByTagName('th')[0];
-      if (th)
-        addTierHeader(i);
-      else if (isPlayerRow(i))
-        addTierTd(i);
-    }
-  })
-  .catch(e => { });
+window.addEventListener('load', function () {
+  let promises = Object.keys(links).map(pos => setTierInfo(pos));
+  Promise.all(promises)
+    .then(_responses => {
+      addTierHeader();
+      const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
+      for (let row of rows) {
+        addTierTd(row);
+      }
+    })
+    .catch(_e => { });
+});
 
 /* Checks whether the row in the table stores a player */
-function isPlayerRow(i) {
-  return rows[i].id.startsWith(PLAYER_ROW_ID_1)
-    || rows[i].id.startsWith(PLAYER_ROW_ID_2);
+function isPlayerRow(row) {
+  return row.children[0].innerText.length > 0;
 }
 
 /* Set tier info from Boris Chen for each position */
@@ -68,60 +58,64 @@ function setTierInfo(pos) {
   });
 }
 
-/* Add spacer cell */
-function addSpacer(i) {
-  var space = rows[i].insertCell();
-  space.className = SPACER_CLASS;
-}
-
 /* Add header cell */
-function addTierHeader(i) {
-  var newTh = document.createElement('th');
-  rows[i].appendChild(newTh);
+function addTierHeader() {
+  const headerRow = document.getElementsByClassName(TABLE_HEADER_CLASS)[0].children[0];
+  let newTh = document.createElement('th');
   newTh.innerHTML = COLUMN_NAME;
   newTh.rowSpan = 2;
+  headerRow.appendChild(newTh);
 }
 
 /* Add tier cell */
-function addTierTd(i) {
-  var newTd = rows[i].insertCell();
-  getTierText(i).then(tierText => {
+function addTierTd(row) {
+  if (!isPlayerRow(row))
+    return;
+
+  let newTd = row.insertCell();
+  let div = document.createElement('div');
+  div.style.margin = CELL_DIV_MARGIN;
+  div.align = CELL_ALIGN;
+  newTd.appendChild(div);
+  newTd.className = CELL_CLASS;
+  getTierText(row).then(tierText => {
     // Set cell text
-    newTd.innerHTML = tierText;
+    div.innerHTML = tierText;
 
     // Set cell color if not unranked and colors setting is set to true
     if (tierText != UNRANKED_TEXT) {
       chrome.storage.sync.get(COLORS_ID, colorsRes => {
         if (colorsRes[COLORS_ID]) {
-          var tierTextWords = tierText.split(/\s+/)
-          var tierNumber = parseInt(tierTextWords[tierTextWords.length - 1]);
-          var color = COLORS[(tierNumber - 1) % COLORS.length];
+          let tierTextWords = tierText.split(/\s+/)
+          let tierNumber = parseInt(tierTextWords[tierTextWords.length - 1]);
+          let color = COLORS[(tierNumber - 1) % COLORS.length];
           newTd.style = 'background-color:' + color + ';';
         }
       });
     }
   });
-  newTd.align = CELL_ALIGN;
 }
 
 /* Set the tier in the cell */
-function getTierText(i) {
+function getTierText(row) {
   return new Promise((resolve, reject) => {
     // If on team page, player in cell index 1, otherwise in cell index 0
-    var playerIndex = window.location.href.includes('clubhouse') ? 1 : 0;
-    var playerInfo = rows[i].getElementsByTagName('td')[playerIndex].innerText;
-    var [name, position] = playerInfo.split(/,\s+/);
+    let playerIndex = window.location.href.includes('team') ? 1 : 0;
+    let playerInfo = row.getElementsByTagName('td')[playerIndex].innerText;
+    let splitPlayerInfo = playerInfo.split(/[\r\n]+/);
+    let name = splitPlayerInfo[0];
+    let position = splitPlayerInfo[splitPlayerInfo.length - 1];
     // Trim name and get the first two words of it
     name = name.trim().split(/\s+/).slice(0, 2).join(' ');
 
     // Gets scoring type (STD, 0.5 PPR, PPR)
     chrome.storage.sync.get(SCORING_STORAGE_ID, scoringRes => {
-      var scoringType = scoringRes[SCORING_STORAGE_ID];
+      let scoringType = scoringRes[SCORING_STORAGE_ID];
       if (!scoringType)
         scoringType = DEFAULT_SCORING;
 
       // Gets the tier info of the player's position
-      var tierInfo;
+      let tierInfo;
       if (name.includes(DEFENSE)) {
         pos = DEFENSE;
         name = name.split(/\s+/)[0];
@@ -151,7 +145,7 @@ function getTierText(i) {
         }
       }
 
-      var tier = getTierFromName(name, tierInfo);
+      let tier = getTierFromName(name, tierInfo);
       if (tier == TIER_NOT_FOUND)
         return resolve(UNRANKED_TEXT);
       return resolve(pos + ' ' + TIER + ' ' + tier);
@@ -161,8 +155,8 @@ function getTierText(i) {
 
 /* Get the tier of a player from the name and tier information */
 function getTierFromName(name, tierInfo) {
-  var lines = tierInfo.split('\n');
-  for (var i = 0; i < lines.length; i++) {
+  let lines = tierInfo.split('\n');
+  for (let i = 0; i < lines.length; i++) {
     if (lines[i].includes(name))
       return i + 1;
   }

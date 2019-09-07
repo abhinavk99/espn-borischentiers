@@ -1,13 +1,13 @@
 {
     "manifest_version": 2,
     "name": "ESPN Boris Chen Tiers",
-    "version": "1.9",
+    "version": "2.0",
     "description": "Integrates Boris Chen tiers into ESPN Fantasy Football",
     "content_scripts": [
         {
             "matches": [
-                "*://games.espn.com/ffl/clubhouse?*",
-                "*://games.espn.com/ffl/freeagency?*"
+                "*://fantasy.espn.com/football/team?*",
+                "*://fantasy.espn.com/football/players/add?*"
             ],
             "js": [
                 "src/js/playerNameFixes.js",

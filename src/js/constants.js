@@ -1,12 +1,12 @@
 const UNRANKED_TEXT = 'Unranked';
 const TIER_NOT_FOUND = 'N/A';
 
-const TABLE_ID = 'playertable_0';
-const PLAYER_ROW_ID_1 = 'pncPlayerRow';
-const PLAYER_ROW_ID_2 = 'plyr';
-const CELL_ALIGN = 'center';
+const TABLE_HEADER_CLASS = 'Table2__header-group Table2__thead';
+const TABLE_BODY_CLASS = 'Table2__tbody';
+const CELL_CLASS = 'Table2__td';
 const COLUMN_NAME = 'Boris Chen Tier';
-const SPACER_CLASS = 'sectionLeadingSpacer';
+const CELL_ALIGN = 'center';
+const CELL_DIV_MARGIN = 'auto';
 
 const TIER = 'tier';
 
