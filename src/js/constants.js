@@ -7,6 +7,10 @@ const CELL_CLASS = 'Table2__td';
 const COLUMN_NAME = 'Boris Chen Tier';
 const CELL_ALIGN = 'center';
 const CELL_DIV_MARGIN = 'auto';
+const PLAYERS_TABLE_CONTROLS_CLASS = 'playersTableControls';
+const CONTAINER_CLASS = 'generic--container';
+
+const TIER_HEADER_ID = 'boris-chen-tiers-header';
 
 const TIER = 'tier';
 
