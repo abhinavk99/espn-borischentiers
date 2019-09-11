@@ -40,25 +40,25 @@ window.addEventListener('load', function () {
 
 function widenTable() {
   const tableWrapper = document.getElementsByClassName(CONTAINER_CLASS)[0];
-  tableWrapper.style.width = '105%';
+  tableWrapper.style.width = PLAYERS_TABLE_STYLE_WIDTH;
 }
 
 function addRefreshButton() {
   const playersTableControls = document.getElementsByClassName(PLAYERS_TABLE_CONTROLS_CLASS)[0];
-  let newButton = document.createElement('button');
-  newButton.innerHTML = 'Refresh';
-  newButton.className = 'btn';
-  newButton.style = 'margin-left: 10px;';
-  newButton.onclick = function () {
+  let refreshTiersButton = document.createElement('button');
+  refreshTiersButton.innerHTML = REFRESH_TIERS_BUTTON_TEXT;
+  refreshTiersButton.className = REFRESH_TIERS_BUTTON_CLASS;
+  refreshTiersButton.style = REFRESH_TIERS_BUTTON_STYLE;
+  refreshTiersButton.onclick = function () {
     removeOldTiersHTML();
     addBorisChenTiersHTML();
   };
-  playersTableControls.appendChild(newButton);
+  playersTableControls.appendChild(refreshTiersButton);
 }
 
 function removeOldTiersHTML() {
-  const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
   removeTierHeader();
+  const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
   for (let row of rows) {
     removeTierTd(row);
   }
@@ -91,7 +91,7 @@ function setTierInfo(pos) {
 }
 
 function removeTierHeader() {
-  var tierHeader = document.getElementById(TIER_HEADER_ID);
+  const tierHeader = document.getElementById(TIER_HEADER_ID);
   tierHeader.parentNode.removeChild(tierHeader);
 }
 
@@ -101,7 +101,7 @@ function addTierHeader() {
   let newTh = document.createElement('th');
   newTh.innerHTML = COLUMN_NAME;
   newTh.id = TIER_HEADER_ID;
-  newTh.colSpan = 2;
+  newTh.rowSpan = 2;
   headerRow.appendChild(newTh);
 }
 
