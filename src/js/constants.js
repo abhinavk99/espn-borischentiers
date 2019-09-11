@@ -7,6 +7,15 @@ const CELL_CLASS = 'Table2__td';
 const COLUMN_NAME = 'Boris Chen Tier';
 const CELL_ALIGN = 'center';
 const CELL_DIV_MARGIN = 'auto';
+const PLAYERS_TABLE_STYLE_WIDTH = '105%';
+const PLAYERS_TABLE_CONTROLS_CLASS = 'playersTableControls';
+const CONTAINER_CLASS = 'generic--container';
+
+const REFRESH_TIERS_BUTTON_TEXT = 'Refresh Boris Chen Tiers';
+const REFRESH_TIERS_BUTTON_STYLE = 'margin-left: 10px;';
+const REFRESH_TIERS_BUTTON_CLASS = 'btn';
+
+const TIER_HEADER_ID = 'boris-chen-tiers-header';
 
 const TIER = 'tier';
 

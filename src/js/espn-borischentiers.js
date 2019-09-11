@@ -31,14 +31,48 @@ window.addEventListener('load', function () {
   let promises = Object.keys(links).map(pos => setTierInfo(pos));
   Promise.all(promises)
     .then(_responses => {
-      addTierHeader();
-      const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
-      for (let row of rows) {
-        addTierTd(row);
-      }
+      widenTable();
+      addBorisChenTiersHTML();
+      addRefreshButton();
     })
     .catch(_e => { });
 });
+
+function widenTable() {
+  const tableWrapper = document.getElementsByClassName(CONTAINER_CLASS)[0];
+  tableWrapper.style.width = PLAYERS_TABLE_STYLE_WIDTH;
+}
+
+function addRefreshButton() {
+  const playersTableControls = document.getElementsByClassName(PLAYERS_TABLE_CONTROLS_CLASS)[0];
+  let refreshTiersButton = document.createElement('button');
+  refreshTiersButton.innerHTML = REFRESH_TIERS_BUTTON_TEXT;
+  refreshTiersButton.className = REFRESH_TIERS_BUTTON_CLASS;
+  refreshTiersButton.style = REFRESH_TIERS_BUTTON_STYLE;
+  refreshTiersButton.onclick = function () {
+    removeOldTiersHTML();
+    addBorisChenTiersHTML();
+  };
+  playersTableControls.appendChild(refreshTiersButton);
+}
+
+function removeOldTiersHTML() {
+  const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
+  for (let row of rows) {
+    removeTierTd(row);
+  }
+}
+
+function addBorisChenTiersHTML() {
+  const tierHeader = document.getElementById(TIER_HEADER_ID);
+  if (!tierHeader) {
+    addTierHeader();
+  }
+  const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
+  for (let row of rows) {
+    addTierTd(row);
+  }
+}
 
 /* Checks whether the row in the table stores a player */
 function isPlayerRow(row) {
@@ -63,8 +97,15 @@ function addTierHeader() {
   const headerRow = document.getElementsByClassName(TABLE_HEADER_CLASS)[0].children[0];
   let newTh = document.createElement('th');
   newTh.innerHTML = COLUMN_NAME;
+  newTh.id = TIER_HEADER_ID;
   newTh.rowSpan = 2;
   headerRow.appendChild(newTh);
+}
+
+function removeTierTd(row) {
+  if (!isPlayerRow(row))
+    return;
+  row.deleteCell(-1);
 }
 
 /* Add tier cell */
