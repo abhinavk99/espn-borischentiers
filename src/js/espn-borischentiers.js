@@ -57,7 +57,6 @@ function addRefreshButton() {
 }
 
 function removeOldTiersHTML() {
-  removeTierHeader();
   const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
   for (let row of rows) {
     removeTierTd(row);
@@ -65,7 +64,10 @@ function removeOldTiersHTML() {
 }
 
 function addBorisChenTiersHTML() {
-  addTierHeader();
+  const tierHeader = document.getElementById(TIER_HEADER_ID);
+  if (!tierHeader) {
+    addTierHeader();
+  }
   const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
   for (let row of rows) {
     addTierTd(row);
@@ -88,11 +90,6 @@ function setTierInfo(pos) {
       })
       .catch(e => reject(e));
   });
-}
-
-function removeTierHeader() {
-  const tierHeader = document.getElementById(TIER_HEADER_ID);
-  tierHeader.parentNode.removeChild(tierHeader);
 }
 
 /* Add header cell */
