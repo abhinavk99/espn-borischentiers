@@ -59,7 +59,7 @@ function addRefreshButton() {
 function removeOldTiersHTML() {
   const rows = document.getElementsByClassName(TABLE_BODY_CLASS)[0].rows;
   for (let row of rows) {
-    removeTierTd(row);
+    row.deleteCell(-1);
   }
 }
 
@@ -95,30 +95,33 @@ function setTierInfo(pos) {
 /* Add header cell */
 function addTierHeader() {
   const headerRow = document.getElementsByClassName(TABLE_HEADER_CLASS)[0].children[0];
+  headerRow.cells[headerRow.cells.length - 1].classList.add(CELL_BORDER_CLASS);
+
   let newTh = document.createElement('th');
   newTh.innerHTML = COLUMN_NAME;
   newTh.id = TIER_HEADER_ID;
   newTh.rowSpan = 2;
   headerRow.appendChild(newTh);
-}
 
-function removeTierTd(row) {
-  if (!isPlayerRow(row))
-    return;
-  row.deleteCell(-1);
+  const subheaderRow = document.getElementsByClassName(TABLE_SUBHEADER_CLASS)[0].children[0];
+  subheaderRow.cells[subheaderRow.cells.length - 1].classList.add(CELL_BORDER_CLASS);
 }
 
 /* Add tier cell */
 function addTierTd(row) {
-  if (!isPlayerRow(row))
-    return;
+  row.cells[row.cells.length - 1].classList.add(CELL_BORDER_CLASS);
 
   let newTd = row.insertCell();
+  if (!isPlayerRow(row)) {
+    newTd.className = NON_PLAYER_CELL_CLASS;
+    return;
+  }
+
   let div = document.createElement('div');
-  div.style.margin = CELL_DIV_MARGIN;
-  div.align = CELL_ALIGN;
+  div.style.margin = PLAYER_CELL_DIV_MARGIN;
+  div.align = PLAYER_CELL_ALIGN;
   newTd.appendChild(div);
-  newTd.className = CELL_CLASS;
+  newTd.className = PLAYER_CELL_CLASS;
   getTierText(row).then(tierText => {
     // Set cell text
     div.innerHTML = tierText;
